@@ -5,13 +5,9 @@ const Category = ({product}) => {
     return (
         
         <div className="rounded-2xl bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-1 shadow-xl">
-            <Link className="block rounded-xl bg-white p-6 sm:p-8" href="">
-                <div className="mt-16 sm:pr-8">
-                    <h3 className="text-xl font-bold text-gray-900">{product.category}</h3>
-
-                    <p className="mt-2 text-sm text-gray-500">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad, adipisci.
-                    </p>
+            <Link to={`categoryProduct/${product.category}`} className="block rounded-xl bg-white p-6 sm:p-8" href="">
+                <div className=" sm:pr-8">
+                    <h3 className="text-xl font-bold text-center text-gray-900">{product.category}</h3>
                 </div>
             </Link>
         </div>

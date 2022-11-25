@@ -11,13 +11,16 @@ const AdvertisItems = ({product}) => {
                     <div className="px-8 pb-8 transition-opacity w-full  group-hover:absolute group-hover:opacity-0">
                     <img src={product.picture} className="w-full mx-auto h-[250px]" alt="" />
 
-                    <h2 className="mt-4 text-2xl font-medium">{product.name}</h2>
+                    <h2 className="mt-4 text-2xl font-medium">{product.title}</h2>
                     </div>
 
                     <div className="absolute p-8 opacity-0 transition-opacity group-hover:relative group-hover:opacity-100">
                     <h3 className="mt-4 text-2xl font-medium">{product.name}</h3>
 
+                    <p className="mt-4"> Description : {product.Description}</p>
+                    <p className="mt-4"> Condition : {product.Condition}</p>
                     <p className="mt-4"> Company : {product.category}</p>
+                    <p className="mt-4"> original : {product.resalePrice}</p>
                     <p className="mt-4">Location : {product.location}</p>
                     <p className="mt-4">Selling Price : $ {product.resalePrice}</p>
 

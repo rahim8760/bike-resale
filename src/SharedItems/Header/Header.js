@@ -44,12 +44,15 @@ const Header = () => {
             <div className="navbar-end">
                 <div className='flex'>
                     {
-                        user?.photoURL?<img title='name' className='w-5 h-5 mr-5' src={user?.photoURL} alt="Something wrong" />:
+                        user?.photoURL?<img title={user?.displayName? user?.displayName:user?.email} className='w-5 h-5 mr-5' src={user?.photoURL} alt={<FaUserAlt />} />:
                         <p className='mr-5'><FaUserAlt /></p>
                     }
                     {
                         user?.displayName? <p className='mr-5'>{user?.displayName}</p>: <p className='mr-5'>{user?.email}</p>
                     } 
+                    <label htmlFor="dashboard-drawer" tabIndex={2} className="btn btn-ghost lg:hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+                    </label>
                 </div>
             </div>
         </div>

@@ -1,5 +1,6 @@
 import DashBoardLayout from "../../Layout/DashBoardLayout";
 import Blog from "../../Pages/Blog/Blog";
+import AddProduct from "../../Pages/DashBoard/AddProduct/AddProduct";
 import DashBoard from "../../Pages/DashBoard/DashBoard/DashBoard";
 import InputCategory from "../../Pages/DashBoard/InputCategory/InputCategory";
 import Seller from "../../Pages/DashBoard/Seller/Seller";
@@ -65,6 +66,10 @@ const router=createBrowserRouter([
             {
                 path:'/dashBoard/seller',
                 element:<Seller></Seller>
+            },
+            {
+                path:'/dashBoard/addProduct',
+                element:<AddProduct></AddProduct>
             }
         ]
     }

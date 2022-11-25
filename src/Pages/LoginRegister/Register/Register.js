@@ -21,8 +21,21 @@ const Register = () => {
     const displayName=form.displayName.value
     const email=form.email.value
     const password=form.password.value
-    const role=form.role.value
     const photo=form.userPhoto.files[0]
+
+    fetch('http://localhost:5000/users',{
+      method:"POST",
+      headers:{
+        "content-type":"application/json"
+      },
+      body:JSON.stringify(dbUser)
+    })
+    .then(res=>res.json())
+    .then(result=>{
+      console.log(result)
+    })
+
+    // image bb start
     const formData=new FormData()
     formData.append('image', photo)
 
@@ -50,6 +63,7 @@ const Register = () => {
                 toast.success('Please verify your email address.')
                 navigate(forms,{replace: true})
                 
+                
             })
             .catch(err => {
                 setError('User All Ready Exist');
@@ -59,14 +73,11 @@ const Register = () => {
 
     })
     .catch(er=>console.log(er))
-
-
-    console.log(displayName, email, password, role );
+    
     
 
     }
     
-    console.log(dbUser);
     const handleBlur=event=>{
         const FieldName=event.target.name;
         const FieldValue=event.target.value;
