@@ -8,6 +8,7 @@ import ShowAdvertisement from "../../Pages/DashBoard/ShowAdvertisement/ShowAdver
 import Users from "../../Pages/DashBoard/Users/Users";
 import Login from "../../Pages/LoginRegister/Login/Login";
 import Register from "../../Pages/LoginRegister/Register/Register";
+import Products from "../../Pages/Products/Products";
 import ErrorPage from "../../SharedItems/ErrorPage/ErrorPage";
 
 const { createBrowserRouter } = require("react-router-dom");
@@ -39,6 +40,12 @@ const router=createBrowserRouter([
             {
                 path:'/register',
                 element:<Register></Register>
+            },
+            {
+                path:`/categoryProduct/:id`,
+                element:<Products></Products>,
+                loader:({params})=>fetch(`http://localhost:5000/product/${params.id}`)
+                
             }
         ]
     },

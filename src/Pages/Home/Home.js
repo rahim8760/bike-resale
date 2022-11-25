@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import ProductModal from '../../SharedItems/SingleProduct/ProductModal/ProductModal';
+import SingleProduct from '../../SharedItems/SingleProduct/SingleProduct';
 import Category from '../Category/Category';
-import AdvertisItems from './AdvertisItems';
 import WhyUs from './WhyUs/WhyUs';
-
+// import axios from 'axios'
 
 const Home = () => {
     const [category, setCategory]=useState([])
@@ -17,7 +18,13 @@ const Home = () => {
         fetch('http://localhost:5000/product')
         .then(res=>res.json())
         .then(data=>setProductInfo(data))
+        // axios.get('http://localhost:5000/product')
+        // .then(data=>{
+        //     const prosucts=data.data.data;
+        //     setProductInfo(prosucts)
+        // })
     },[])
+    const [productModalInfo, setProductModalInfo]=useState(null)
     return (
         <div>
             <section className="relative bg-[url(https://c.ndtvimg.com/2019-10/5foe9o38_yamaha-mt15_625x300_30_October_19.jpeg)] bg-cover bg-center bg-no-repeat">
@@ -52,11 +59,15 @@ const Home = () => {
                     </div>
                 </div>
             </section>
-            <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-3 mt-10">
+            <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-10 mt-10">
                 {
-                    productInfo.map((product, i)=><AdvertisItems key={i} product={product}></AdvertisItems>)
+                    productInfo.map(singleCate=><SingleProduct key={singleCate._id} singleCate={singleCate} setProductModalInfo={setProductModalInfo}></SingleProduct>)
                 }
             </div>
+            {
+                    productModalInfo &&
+                    <ProductModal productModalInfo={productModalInfo}></ProductModal>
+                }
             <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-3 mt-10">
                 {
                     category.map((product, i)=><Category key={i} product={product}></Category>)
