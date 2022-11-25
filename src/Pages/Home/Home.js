@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Category from '../Category/Category';
 import AdvertisItems from './AdvertisItems';
+import WhyUs from './WhyUs/WhyUs';
 
 const productInfo=[
     {
@@ -120,7 +121,7 @@ const productInfo=[
     },
 ]
 const Home = () => {
-
+    
     return (
         <div>
             <section className="relative bg-[url(https://c.ndtvimg.com/2019-10/5foe9o38_yamaha-mt15_625x300_30_October_19.jpeg)] bg-cover bg-center bg-no-repeat">
@@ -164,6 +165,9 @@ const Home = () => {
                 {
                     productInfo.map((product, i)=><Category key={i} product={product}></Category>)
                 }
+            </div>
+            <div className='mx-auto'>
+                <WhyUs></WhyUs>
             </div>
         </div>
     );
