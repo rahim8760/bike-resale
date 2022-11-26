@@ -10,7 +10,7 @@ const AddProduct = () => {
         photoURL
     }
     const date = new Date().toLocaleString()
-    const [product, SetProduct]=useState({userInfo, date, Status:'panding',})
+    const [product, SetProduct]=useState({userInfo, date, Status:'panding',email})
     
 
     // Handle Submit
@@ -26,7 +26,6 @@ const AddProduct = () => {
     })
     .then(res=>res.json())
     .then(result=>{
-      console.log(result)
         event.target.reset()
 
     })

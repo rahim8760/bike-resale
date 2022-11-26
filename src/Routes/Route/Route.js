@@ -3,6 +3,8 @@ import Blog from "../../Pages/Blog/Blog";
 import AddProduct from "../../Pages/DashBoard/AddProduct/AddProduct";
 import DashBoard from "../../Pages/DashBoard/DashBoard/DashBoard";
 import InputCategory from "../../Pages/DashBoard/InputCategory/InputCategory";
+import MyOrders from "../../Pages/DashBoard/MyOrders/MyOrders";
+import MyProducts from "../../Pages/DashBoard/MyProducts/MyProducts";
 import Seller from "../../Pages/DashBoard/Seller/Seller";
 import ShowAdvertisement from "../../Pages/DashBoard/ShowAdvertisement/ShowAdvertisement";
 import Users from "../../Pages/DashBoard/Users/Users";
@@ -63,10 +65,6 @@ const router=createBrowserRouter([
                 element:<InputCategory></InputCategory>
             },
             {
-                path:'/dashBoard/user',
-                element:<Users></Users>
-            },
-            {
                 path:'/dashBoard/advertisement',
                 element:<ShowAdvertisement></ShowAdvertisement>
             },
@@ -77,6 +75,14 @@ const router=createBrowserRouter([
             {
                 path:'/dashBoard/addProduct',
                 element:<AddProduct></AddProduct>
+            },
+            {
+                path:'/dashBoard/myOrder',
+                element:<MyOrders></MyOrders>
+            },
+            {
+                path:'/dashBoard/myProduct',
+                element:<MyProducts></MyProducts>
             }
         ]
     }

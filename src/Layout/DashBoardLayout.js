@@ -15,10 +15,11 @@ const DashBoardLayout = () => {
                     <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
                     <ul className="menu p-4 w-80 text-base-content">    
                         <li><Link to="/dashBoard/advertisement">Show Advertisement</Link></li>
-                        <li><Link to="/dashBoard/user">Users</Link></li>
-                        <li><Link to="/dashBoard/seller">seller</Link></li>
+                        <li><Link to="/dashBoard/seller">User Information</Link></li>
                         <li><Link to="/dashBoard/inputCategory">Category Input</Link></li>
                         <li><Link to="/dashBoard/addProduct">Add Product</Link></li>
+                        <li><Link to="/dashBoard/myProduct">My Products</Link></li>
+                        <li><Link to="/dashBoard/myOrder">My Orders</Link></li>
                     </ul>
 
                 </div>

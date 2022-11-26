@@ -32,7 +32,6 @@ const Register = () => {
     })
     .then(res=>res.json())
     .then(result=>{
-      console.log(result)
     })
 
     // image bb start
@@ -45,7 +44,6 @@ const Register = () => {
     })
     .then(res=>res.json())
     .then(data=>{
-        console.log(data.data.url)
         if(data?.data?.url){
             const imagUrl=data.data.url;
             createUser(email, password)
@@ -56,7 +54,6 @@ const Register = () => {
                     photoURL:imagUrl,
                 };
                 updateUserProfile(userinfo)
-                console.log(user);
                 setUser(user);
                 setError('');
                 form.reset();
@@ -73,9 +70,6 @@ const Register = () => {
 
     })
     .catch(er=>console.log(er))
-    
-    
-
     }
     
     const handleBlur=event=>{
