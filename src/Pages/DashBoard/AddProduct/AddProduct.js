@@ -1,4 +1,5 @@
 import React, {  useContext, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 const AddProduct = () => {
     const {user}=useContext(AuthContext)
@@ -10,7 +11,7 @@ const AddProduct = () => {
         photoURL
     }
     const date = new Date().toLocaleString()
-    const [product, SetProduct]=useState({userInfo, date, Status:'panding',email})
+    const [product, SetProduct]=useState({userInfo, date, Status:'Available',email})
     
 
     // Handle Submit
@@ -27,6 +28,7 @@ const AddProduct = () => {
     .then(res=>res.json())
     .then(result=>{
         event.target.reset()
+        toast.success('Add Product Successful')
 
     })
     }

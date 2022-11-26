@@ -57,7 +57,7 @@ const Login = () => {
                 form.reset();
                 setError('');
                 navigate(from, {replace: true});
-                toast.success(`welcome${email}`)
+                toast.success(`welcome  ${email}`)
             })
             .catch(error => {
                 console.error(error)

@@ -6,12 +6,12 @@ import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 const Register = () => {
     const { createUser,setUser, updateUserProfile} = useContext(AuthContext);
     const [error, setError] = useState('');
-    const [dbUser, SetDbUser]=useState({})
-
+    
     // use navigate
     const navigate=useNavigate()
     const location = useLocation();
     const forms = location.state?.from?.pathname || '/';
+    const [dbUser, SetDbUser]=useState({})
 
     // Handle Submit
 
@@ -57,7 +57,7 @@ const Register = () => {
                 setUser(user);
                 setError('');
                 form.reset();
-                toast.success('Please verify your email address.')
+                toast.success(`Welcome ${displayName}`)
                 navigate(forms,{replace: true})
                 
                 
@@ -129,3 +129,5 @@ const Register = () => {
 };
 
 export default Register;
+
+

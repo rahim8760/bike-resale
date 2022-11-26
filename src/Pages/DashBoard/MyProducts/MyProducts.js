@@ -1,27 +1,62 @@
-import { useQuery } from '@tanstack/react-query';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
 import {AuthContext} from '../../../Context/AuthProvider/AuthProvider'
+import axios from "axios";
+import { toast } from 'react-toastify';
+
 const MyProducts = () => {
     const {user}=useContext(AuthContext)
-    console.log(user);
-    const{email}=user
-    const { data: products = [] } = useQuery({
-        queryKey: ['appointmentOptions', email],
-        queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/myProduct/${email}`);
-            const data = await res.json();
-            return data
-        }
-    });
-    useEffect(()=>{
+    const{email, displayName}=user
+    console.log(email);
 
-    },[])
+    const [showProducts, setShowProducts]=useState([])
+        useEffect(()=>{
+            axios
+            .get(`http://localhost:5000/myProduct/${email}`)
+            .then((res) => setShowProducts(res.data));
+        },[email])
+
+    const handleDelete = id=>{
+        const agree =window.confirm('you want to delete')
+        if(agree){
+            fetch(`http://localhost:5000/productDelete/${id}`,{
+                method:'DELETE'
+            })
+            .then(res=>res.json())
+            .then (data=>{
+                if(data.deletedCount > 0){
+                  const remaining = showProducts.filter(r => r._id !== id);
+                  setShowProducts(remaining);
+                    toast.success('delete successfully')
+                }
+            })
+        }
+      }
+      const status={
+        Status:'approved'
+      }
+      console.log(status);
+      const handleSubmit=(id)=>{
+        console.log(id);
+        fetch(`http://localhost:5000/updateProduct/${id}`,{
+            method:'PUT',
+            headers:{
+                'content-type':'application/json'
+            },
+            body:JSON.stringify(status)
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data)
+            setShowProducts(...data)
+        })
+    }
+    
     return (
         <div>
             <div>
-                <h1>this is my  product</h1>
+                <h1 className='text-3xl font-bold my-10 bg-lime-200 rounded-3xl py-10 uppercase text-center'>this is {displayName}  product</h1>
             </div>
             <div className="overflow-x-auto">
                 <table className="table table-compact w-full">
@@ -35,12 +70,13 @@ const MyProducts = () => {
                         <th>Sell Price</th> 
                         <th>used</th>
                         <th>status</th>
+                        <th>advertise</th>
                         <th>Delete</th>
                     </tr>
                     </thead>
                     <tbody> 
                         {
-                            products.map((product,i)=><tr key={product._id}>
+                            showProducts.map((product,i)=><tr key={product._id}>
                             <th>{i+1}</th> 
                             <td>{product.title}</td> 
                             <td>
@@ -55,7 +91,8 @@ const MyProducts = () => {
                             <td>{product.resalePrice}</td> 
                             <td>{product.useTime}</td>
                             <td>{product.Status}</td>
-                            <td><button className='btn btn-sm bg-red-600'>DELETE</button></td>
+                            <td><button type='submit' onClick={()=>handleSubmit(product._id)}  className='btn disabled btn-sm bg-info'> make advertise</button></td>
+                            <td><button onClick={()=>handleDelete(product._id)} className='btn btn-sm bg-red-600'>DELETE</button></td>
                             </tr>)
                         }      
                     </tbody> 

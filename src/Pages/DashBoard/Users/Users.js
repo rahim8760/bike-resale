@@ -1,15 +1,30 @@
-import React, { useEffect, useState } from 'react';
-import axios from "axios";
+import React, { useContext, } from 'react';
+import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 const Users = () => {
-    const [dbUser, setDbUser]=useState([])
-    useEffect(()=>{
-        axios
-        .get(`http://localhost:5000/users/${'User'}`)
-        .then((res) => setDbUser(res.data));
-    },[])
+    const {user}=useContext(AuthContext)
+    const {displayName, email, photoURL, }=user
+    
     return (
         <div>
-           <p>{dbUser.length}</p>
+            <div>
+                <h1 className='text-3xl font-bold my-10 bg-cyan-200 rounded-3xl py-10 uppercase text-center'>This is  {displayName} Profile</h1>
+            </div>
+            <div className='flex justify-evenly my-10'>
+           <div className="avatar">
+                <div className="w-24 rounded-full">
+                    <img src={photoURL} alt='' />
+                </div>
+            </div>
+           <div className="">
+            <div className="">
+                <h1 className='text-3xl font-semibold'>{displayName}</h1>
+            </div>
+            <div className="">
+                <h1 className='text-3xl font-semibold'>{email}</h1>
+            </div>
+           </div>
+            
+        </div>
         </div>
     );
 };

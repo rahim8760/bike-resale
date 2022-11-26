@@ -12,6 +12,7 @@ import Login from "../../Pages/LoginRegister/Login/Login";
 import Register from "../../Pages/LoginRegister/Register/Register";
 import Products from "../../Pages/Products/Products";
 import ErrorPage from "../../SharedItems/ErrorPage/ErrorPage";
+import PrivetRouter from "../PrivetRouter/PrivetRouter";
 
 const { createBrowserRouter } = require("react-router-dom");
 const { default: Main } = require("../../Layout/Main");
@@ -82,7 +83,11 @@ const router=createBrowserRouter([
             },
             {
                 path:'/dashBoard/myProduct',
-                element:<MyProducts></MyProducts>
+                element:<PrivetRouter><MyProducts></MyProducts></PrivetRouter>
+            },
+            {
+                path:'/dashBoard/myProfile',
+                element:<Users></Users>
             }
         ]
     }
