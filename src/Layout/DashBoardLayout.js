@@ -20,6 +20,7 @@ const DashBoardLayout = () => {
                         <li><Link to="/dashBoard/inputCategory">Category Input</Link></li>
                         <li><Link to="/dashBoard/addProduct">Add Product</Link></li>
                         <li><Link to="/dashBoard/myProduct">My Products</Link></li>
+                        <li><Link to="/dashBoard/myBuyers">My Buyers</Link></li>
                         <li><Link to="/dashBoard/myOrder">My Orders</Link></li>
                     </ul>
 

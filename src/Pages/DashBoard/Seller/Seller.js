@@ -43,7 +43,7 @@ const Seller = () => {
     return (
         
         <div>
-            <h1>this is seller component</h1>
+            <h1 className='text-3xl font-bold my-10 bg-red-300 rounded-3xl py-10 uppercase text-center'>this is user component</h1>
             
             <form onSubmit={handleSubmit} className="card flex-shrink-0 mx-auto w-full max-w-sm shadow-2xl bg-base-100">
                 <div className="card-body">

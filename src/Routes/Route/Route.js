@@ -2,6 +2,7 @@ import DashBoardLayout from "../../Layout/DashBoardLayout";
 import Blog from "../../Pages/Blog/Blog";
 import AddProduct from "../../Pages/DashBoard/AddProduct/AddProduct";
 import InputCategory from "../../Pages/DashBoard/InputCategory/InputCategory";
+import MyBuyers from "../../Pages/DashBoard/MyBuyers/MyBuyers";
 import MyOrders from "../../Pages/DashBoard/MyOrders/MyOrders";
 import MyProducts from "../../Pages/DashBoard/MyProducts/MyProducts";
 import Seller from "../../Pages/DashBoard/Seller/Seller";
@@ -79,6 +80,10 @@ const router=createBrowserRouter([
             {
                 path:'/dashBoard/myOrder',
                 element:<MyOrders></MyOrders>
+            },
+            {
+                path:'/dashBoard/myBuyers',
+                element:<MyBuyers></MyBuyers>
             },
             {
                 path:'/dashBoard/myProduct',
