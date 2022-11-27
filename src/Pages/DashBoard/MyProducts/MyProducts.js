@@ -39,7 +39,7 @@ const MyProducts = () => {
       console.log(status);
       const handleSubmit=(id)=>{
         console.log(id);
-        fetch(`http://localhost:5000/updateProduct/${id}`,{
+        fetch(`http://localhost:5000/updateProduct?status=/${id}`,{
             method:'PUT',
             headers:{
                 'content-type':'application/json'
@@ -89,9 +89,9 @@ const MyProducts = () => {
                             <td>{product.Condition}</td> 
                             <td>{product.originalPrice}</td> 
                             <td>{product.resalePrice}</td> 
-                            <td>{product.useTime}</td>
-                            <td>{product.Status}</td>
-                            <td><button type='submit' onClick={()=>handleSubmit(product._id)}  className='btn disabled btn-sm bg-info'> make advertise</button></td>
+                            <td>{product.useTime} Year</td>
+                            <td>{product?.Status }</td>
+                            <td> {product?.Status ==='approved' ? <><button type='submit' onClick={()=>handleSubmit(product._id)} disabled className='btn  btn-sm bg-info' > make advertise</button></>:<><button type='submit' onClick={()=>handleSubmit(product._id)}  className='btn btn-sm bg-info' > make advertise</button></> } </td>
                             <td><button onClick={()=>handleDelete(product._id)} className='btn btn-sm bg-red-600'>DELETE</button></td>
                             </tr>)
                         }      

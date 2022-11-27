@@ -1,18 +1,41 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 
 const ProductModal = ({productModalInfo}) => {
     const {Condition, Description, category, picture, resalePrice, date, location, originalPrice, title, userInfo}=productModalInfo
-    const{displayName, email}=userInfo
-    const handleSubmit=event=>{
+    
+    const {user}=useContext(AuthContext)
+    const {displayName, email}=user
+    const [bookingInfo, setBookingInfo]=useState({sellerEmail:userInfo.email,resalePrice,location,picture,title,byerEmail:user?.email, byerdisplayName:user?.displayName})
+    console.log(bookingInfo);
+    const handleBlur=event=>{
+        const FieldName=event.target.name;
+        const FieldValue=event.target.value;
+        console.log(FieldName, FieldValue);
+        const newUser={...bookingInfo};
+        newUser[FieldName]=FieldValue;
+        setBookingInfo(newUser);
+    }
+    
+    const handleBookingSubmit=event=>{
+        fetch('http://localhost:5000/booking',{
+      method:"POST",
+      headers:{
+        "content-type":"application/json"
+      },
+      body:JSON.stringify(bookingInfo)
+    })
+    .then(res=>res.json())
+    .then(result=>{
+    })
 
     }
-    console.log(Condition, Description, category, picture, resalePrice, date, location, originalPrice, title, userInfo);
     return (
         <>
           <input type="checkbox" id="booking-modal" className="modal-toggle" />
                 <div className="modal modal-bottom sm:modal-middle">
                     <div className="modal-box">
-                        <form onSubmit={handleSubmit} className="card my-8  p-5 w-full shadow-2xl bg-base-100">
+                        <form onSubmit={handleBookingSubmit} className="card my-8  p-5 w-full shadow-2xl bg-base-100">
                         
                             <div className="sm:card-body ">
                                 <div className="form-control">
@@ -43,19 +66,19 @@ const ProductModal = ({productModalInfo}) => {
                                     <label className="label">
                                         <span className="label-text">Phone Number</span>
                                     </label>
-                                <input type="text" name='phoneNumber'  placeholder="Phone Number" className="input input-bordered" />
+                                <input type="text" name='phoneNumber' onBlur={handleBlur}  placeholder="Phone Number" className="input input-bordered" />
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Meet Location</span>
                                     </label>
-                                <input type="text" name='meetLocation'  placeholder="Meet Location" className="input input-bordered" />
+                                <input type="text" name='meetLocation' onBlur={handleBlur}  placeholder="Meet Location" className="input input-bordered" />
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Meet Time</span>
                                     </label>
-                                <input type="text" name='meetTime'  placeholder="Meet Time" className="input input-bordered" />
+                                <input type="text" name='meetTime' onBlur={handleBlur} placeholder="Meet Time" className="input input-bordered" />
                                 </div>
                                 
                                 <div className="form-control mt-6">

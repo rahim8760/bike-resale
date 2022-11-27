@@ -75,7 +75,7 @@ const ShowAdvertisement = () => {
                             <td>{product.Condition}</td> 
                             <td>{product.originalPrice}</td> 
                             <td>{product.resalePrice}</td> 
-                            <td>{product.useTime}</td>
+                            <td>{product.useTime} Year</td>
                             <td>{product.Status}</td>
                             <td><button onClick={()=>handleDelete(product._id)} className='btn btn-sm bg-red-600'>DELETE</button></td>
                             </tr>)

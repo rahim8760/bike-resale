@@ -1,7 +1,6 @@
 import DashBoardLayout from "../../Layout/DashBoardLayout";
 import Blog from "../../Pages/Blog/Blog";
 import AddProduct from "../../Pages/DashBoard/AddProduct/AddProduct";
-import DashBoard from "../../Pages/DashBoard/DashBoard/DashBoard";
 import InputCategory from "../../Pages/DashBoard/InputCategory/InputCategory";
 import MyOrders from "../../Pages/DashBoard/MyOrders/MyOrders";
 import MyProducts from "../../Pages/DashBoard/MyProducts/MyProducts";
@@ -59,7 +58,7 @@ const router=createBrowserRouter([
         children:[
             {
                 path:'/dashBoard',
-                element:<DashBoard></DashBoard>
+                element:<Users></Users>
             },
             {
                 path:'/dashBoard/inputCategory',
