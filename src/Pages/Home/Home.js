@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ProductModal from '../../SharedItems/SingleProduct/ProductModal/ProductModal';
+import ReportModal from '../../SharedItems/SingleProduct/ReportModal/ReportModal';
 import SingleProduct from '../../SharedItems/SingleProduct/SingleProduct';
 import Category from '../Category/Category';
 import WhyUs from './WhyUs/WhyUs';
@@ -25,6 +26,7 @@ const Home = () => {
         // })
     },[])
     const [productModalInfo, setProductModalInfo]=useState(null)
+    const [productModalReport, setProductModalReport]=useState(null)
     return (
         <div>
             <section className="relative bg-[url(https://c.ndtvimg.com/2019-10/5foe9o38_yamaha-mt15_625x300_30_October_19.jpeg)] bg-cover bg-center bg-no-repeat">
@@ -61,12 +63,16 @@ const Home = () => {
             </section>
             <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-10 mt-10">
                 {
-                    productInfo.map(singleCate=><SingleProduct key={singleCate._id} singleCate={singleCate} setProductModalInfo={setProductModalInfo}></SingleProduct>)
+                    productInfo.map(singleCate=><SingleProduct key={singleCate._id} singleCate={singleCate} setProductModalReport={setProductModalReport} setProductModalInfo={setProductModalInfo}></SingleProduct>)
                 }
             </div>
-            {
+                {
                     productModalInfo &&
                     <ProductModal productModalInfo={productModalInfo}></ProductModal>
+                }
+                {
+                    productModalReport &&
+                    <ReportModal productModalReport={productModalReport} ></ReportModal>
                 }
             <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-3 mt-10">
                 {

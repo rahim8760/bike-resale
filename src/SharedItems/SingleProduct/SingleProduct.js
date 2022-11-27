@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SingleProduct = ({singleCate, setProductModalInfo}) => {
+const SingleProduct = ({singleCate, setProductModalInfo, setProductModalReport}) => {
     const{Condition, Description, category, picture, resalePrice, date, location, originalPrice, title, userInfo}=singleCate
     const{displayName, photoURL}=userInfo
     return (
@@ -25,7 +25,8 @@ const SingleProduct = ({singleCate, setProductModalInfo}) => {
                         <img src={photoURL} className='w-9 h-9' alt="" /> 
                         <div className="">{displayName}</div>
                     </div>
-                    <div className="card-actions justify-center">
+                    <div className="card-actions justify-between">
+                    <label  onClick={()=>setProductModalReport(singleCate)} className='btn btn-warning' htmlFor="Report-modal"> Report Here</label>
                     <label  onClick={()=>setProductModalInfo(singleCate)} className='btn btn-info' htmlFor="booking-modal">Book Now</label>
                         
                     </div>

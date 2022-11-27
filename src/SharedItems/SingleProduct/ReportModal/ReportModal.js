@@ -1,29 +1,29 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 
-const ProductModal = ({productModalInfo}) => {
-    const {picture, resalePrice,location, title, userInfo}=productModalInfo
+const ReportModal = ({productModalReport}) => {
+    const {picture, resalePrice, location, title, userInfo}=productModalReport
     
     const {user}=useContext(AuthContext)
     const {displayName, email}=user
-    const [bookingInfo, setBookingInfo]=useState({sellerEmail:userInfo.email,resalePrice,location,picture,title,byerEmail:user?.email, byerdisplayName:user?.displayName})
-    console.log(bookingInfo);
+    const [reportInfo, setReportInfo]=useState({sellerEmail:userInfo?.email,resalePrice,location,picture,title,buyerEmail:user?.email, byerdisplayName:user?.displayName})
+    console.log(reportInfo);
     const handleBlur=event=>{
         const FieldName=event.target.name;
         const FieldValue=event.target.value;
         console.log(FieldName, FieldValue);
-        const newUser={...bookingInfo};
+        const newUser={...reportInfo};
         newUser[FieldName]=FieldValue;
-        setBookingInfo(newUser);
+        setReportInfo(newUser);
     }
     
     const handleBookingSubmit=event=>{
-        fetch('http://localhost:5000/booking',{
+        fetch('http://localhost:5000/report',{
       method:"POST",
       headers:{
         "content-type":"application/json"
       },
-      body:JSON.stringify(bookingInfo)
+      body:JSON.stringify(reportInfo)
     })
     .then(res=>res.json())
     .then(result=>{
@@ -32,7 +32,7 @@ const ProductModal = ({productModalInfo}) => {
     }
     return (
         <>
-          <input type="checkbox" id="booking-modal" className="modal-toggle" />
+          <input type="checkbox" id="Report-modal" className="modal-toggle" />
                 <div className="modal modal-bottom sm:modal-middle">
                     <div className="modal-box">
                         <form onSubmit={handleBookingSubmit} className="card my-8  p-5 w-full shadow-2xl bg-base-100">
@@ -70,19 +70,13 @@ const ProductModal = ({productModalInfo}) => {
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
-                                        <span className="label-text">Meet Location</span>
+                                        <span className="label-text">Report Here</span>
                                     </label>
-                                <input type="text" name='meetLocation' onBlur={handleBlur}  placeholder="Meet Location" className="input input-bordered" />
-                                </div>
-                                <div className="form-control">
-                                    <label className="label">
-                                        <span className="label-text">Meet Time</span>
-                                    </label>
-                                <input type="text" name='meetTime' onBlur={handleBlur} placeholder="Meet Time" className="input input-bordered" />
+                                <input type="text" name='Report' onBlur={handleBlur}  placeholder="Report Here" className="input input-bordered" />
                                 </div>
                                 
                                 <div className="form-control mt-6">
-                                    <button type='submit' className="btn btn-primary">Booked</button>
+                                    <button type='submit' className="btn btn-primary">Report</button>
                                 </div>
                             </div>
                     </form>
@@ -91,7 +85,7 @@ const ProductModal = ({productModalInfo}) => {
 
             
                         <div className="modal-action">
-                        <label htmlFor="booking-modal" className="btn">Close</label>
+                        <label htmlFor="Report-modal" className="btn">Close</label>
                         </div>
                     </div>
                 </div>  
@@ -99,4 +93,4 @@ const ProductModal = ({productModalInfo}) => {
     );
 };
 
-export default ProductModal;
+export default ReportModal;

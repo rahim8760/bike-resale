@@ -7,6 +7,7 @@ import MyOrders from "../../Pages/DashBoard/MyOrders/MyOrders";
 import MyProducts from "../../Pages/DashBoard/MyProducts/MyProducts";
 import Seller from "../../Pages/DashBoard/Seller/Seller";
 import ShowAdvertisement from "../../Pages/DashBoard/ShowAdvertisement/ShowAdvertisement";
+import UserReport from "../../Pages/DashBoard/UserReport/UserReport";
 import Users from "../../Pages/DashBoard/Users/Users";
 import Login from "../../Pages/LoginRegister/Login/Login";
 import Register from "../../Pages/LoginRegister/Register/Register";
@@ -84,6 +85,10 @@ const router=createBrowserRouter([
             {
                 path:'/dashBoard/myBuyers',
                 element:<MyBuyers></MyBuyers>
+            },
+            {
+                path:'/dashBoard/userReport',
+                element:<UserReport></UserReport>
             },
             {
                 path:'/dashBoard/myProduct',
