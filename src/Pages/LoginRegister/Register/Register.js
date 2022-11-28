@@ -11,7 +11,7 @@ const Register = () => {
     const navigate=useNavigate()
     const location = useLocation();
     const forms = location.state?.from?.pathname || '/';
-    const [dbUser, SetDbUser]=useState({})
+    const [dbUser, SetDbUser]=useState({userStatus:'unverify'})
 
     // Handle Submit
 

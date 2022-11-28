@@ -1,4 +1,7 @@
+import AdminLayout from "../../Layout/AdminLayout";
+import Buyer from "../../Layout/Buyer";
 import DashBoardLayout from "../../Layout/DashBoardLayout";
+import SellerLayout from "../../Layout/SellerLayout";
 import Blog from "../../Pages/Blog/Blog";
 import AddProduct from "../../Pages/DashBoard/AddProduct/AddProduct";
 import InputCategory from "../../Pages/DashBoard/InputCategory/InputCategory";
@@ -54,48 +57,78 @@ const router=createBrowserRouter([
         ]
     },
     {
-        path:'/dashBoard',
-        element:<DashBoardLayout></DashBoardLayout>,
+        path:'/dashBoard/admin',
+        element:<AdminLayout></AdminLayout>,
         errorElement:<ErrorPage></ErrorPage>,
         children:[
             {
-                path:'/dashBoard',
+                path:'/dashBoard/admin',
                 element:<Users></Users>
             },
             {
-                path:'/dashBoard/inputCategory',
+                path:'/dashBoard/admin/inputCategory',
                 element:<InputCategory></InputCategory>
             },
             {
-                path:'/dashBoard/advertisement',
+                path:'/dashBoard/admin/advertisement',
                 element:<ShowAdvertisement></ShowAdvertisement>
             },
             {
-                path:'/dashBoard/seller',
+                path:'/dashBoard/admin/seller',
                 element:<Seller></Seller>
             },
             {
-                path:'/dashBoard/addProduct',
-                element:<AddProduct></AddProduct>
-            },
-            {
-                path:'/dashBoard/myOrder',
-                element:<MyOrders></MyOrders>
-            },
-            {
-                path:'/dashBoard/myBuyers',
-                element:<MyBuyers></MyBuyers>
-            },
-            {
-                path:'/dashBoard/userReport',
+                path:'/dashBoard/admin/userReport',
                 element:<UserReport></UserReport>
             },
             {
-                path:'/dashBoard/myProduct',
+                path:'/dashBoard/admin/myProfile',
+                element:<Users></Users>
+            }
+        ]
+    },
+    {
+        path:'/dashBoard/seller',
+        element:<SellerLayout></SellerLayout>,
+        errorElement:<ErrorPage></ErrorPage>,
+        children:[
+            {
+                path:'/dashBoard/seller',
+                element:<PrivetRouter><Users></Users></PrivetRouter>
+            },
+            {
+                path:'/dashBoard/seller/addProduct',
+                element:<AddProduct></AddProduct>
+            },
+            {
+                path:'/dashBoard/seller/myBuyers',
+                element:<MyBuyers></MyBuyers>
+            },
+            {
+                path:'/dashBoard/seller/myProduct',
                 element:<PrivetRouter><MyProducts></MyProducts></PrivetRouter>
             },
             {
-                path:'/dashBoard/myProfile',
+                path:'/dashBoard/seller/myProfile',
+                element:<Users></Users>
+            }
+        ]
+    },
+    {
+        path:'/dashBoard/buyer',
+        element:<Buyer></Buyer>,
+        errorElement:<ErrorPage></ErrorPage>,
+        children:[
+            {
+                path:'/dashBoard/buyer',
+                element:<PrivetRouter><Users></Users></PrivetRouter>
+            },
+            {
+                path:'/dashBoard/buyer/myOrder',
+                element:<MyOrders></MyOrders>
+            },
+            {
+                path:'/dashBoard/buyer/myProfile',
                 element:<Users></Users>
             }
         ]

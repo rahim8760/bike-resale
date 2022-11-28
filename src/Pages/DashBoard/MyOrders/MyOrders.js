@@ -12,7 +12,7 @@ const MyOrders = () => {
     const [showProducts, setShowProducts]=useState([])
         useEffect(()=>{
             axios
-            .get(`http://localhost:5000/myBooking/${email}`)
+            .get(`http://localhost:5000/current/${email}`)
             .then((res) => setShowProducts(res.data));
         },[email])
 

@@ -39,7 +39,23 @@ const Seller = () => {
                 })
             }
           }
-    
+          const status={
+            Status:'verify'
+          }
+    const handleUserStatus=id=>{
+        fetch(`http://localhost:5000/updateUser/${id}`,{
+            method:'PUT',
+            headers:{
+                'content-type':'application/json'
+            },
+            body:JSON.stringify(status)
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data)
+        })
+        
+    }
     return (
         
         <div>
@@ -70,6 +86,7 @@ const Seller = () => {
                         <th>Name</th> 
                         <th>Email</th> 
                         <th>User Role</th> 
+                        <th>User Role</th> 
                         <th>UPDATE</th> 
                         <th>DELETE</th>
                         <th>Status</th>
@@ -82,9 +99,18 @@ const Seller = () => {
                             <td>{uInfo.displayName}</td>
                             <td>{uInfo.email}</td> 
                             <td>{uInfo.role}</td> 
+                            <td>{uInfo.role}</td> 
                             <td> <button className='btn btn-sm bg-warning'> UPDATE</button> </td> 
                             <td><button onClick={()=>handleDeletes(uInfo._id)} className='btn btn-sm bg-red-600'> DELETE</button></td>
-                            <td>{uInfo.Status}</td>
+                            <td> 
+                                {
+                                    uInfo?.userStatus==='verify'?<>
+                                    <button disabled className='btn btn-sm'>{uInfo?.userStatus}</button>
+                                    </>:<>
+                                    <button onClick={()=>handleUserStatus(uInfo._id)} className='btn btn-sm bg-info'>{uInfo?.userStatus}</button>   
+                                    </>
+                                }
+                            </td>
                             </tr>)
                         }      
                     </tbody> 

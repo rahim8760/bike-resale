@@ -14,17 +14,13 @@ const Home = () => {
         .then(res=>res.json())
         .then(data=>setCategory(data))
     },[])
-    const [productInfo, setProductInfo]=useState([])
+    const [productInfo, setProductInfo]=useState([]);
     useEffect(()=>{
-        fetch('http://localhost:5000/product')
+        fetch(`http://localhost:5000/products/${'approved'}`)
         .then(res=>res.json())
         .then(data=>setProductInfo(data))
-        // axios.get('http://localhost:5000/product')
-        // .then(data=>{
-        //     const prosucts=data.data.data;
-        //     setProductInfo(prosucts)
-        // })
     },[])
+
     const [productModalInfo, setProductModalInfo]=useState(null)
     const [productModalReport, setProductModalReport]=useState(null)
     return (

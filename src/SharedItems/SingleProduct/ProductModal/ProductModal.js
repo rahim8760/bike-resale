@@ -1,8 +1,9 @@
 import React, { useContext, useState } from 'react';
+import { toast } from 'react-toastify';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 
 const ProductModal = ({productModalInfo}) => {
-    const {picture, resalePrice,location, title, userInfo}=productModalInfo
+    const {picture, resalePrice,location, title, userInfo, _id}=productModalInfo
     
     const {user}=useContext(AuthContext)
     const {displayName, email}=user
@@ -26,9 +27,23 @@ const ProductModal = ({productModalInfo}) => {
       body:JSON.stringify(bookingInfo)
     })
     .then(res=>res.json())
-    .then(result=>{
-    })
+    .then(result=>toast.success('Booking successful'))
 
+    }
+    const status={
+        Status:'sold'
+      }
+      console.log(status);
+      const hendleStatus=(id)=>{
+        console.log(id);
+        fetch(`http://localhost:5000/updateProduct/${id}`,{
+            method:'PUT',
+            headers:{
+                'content-type':'application/json'
+            },
+            body:JSON.stringify(status)
+        })
+        .then(res=>res.json())
     }
     return (
         <>
@@ -82,7 +97,7 @@ const ProductModal = ({productModalInfo}) => {
                                 </div>
                                 
                                 <div className="form-control mt-6">
-                                    <button type='submit' className="btn btn-primary">Booked</button>
+                                    <button type='submit' onClick={()=>hendleStatus(_id)} className="btn btn-primary">Booked</button>
                                 </div>
                             </div>
                     </form>

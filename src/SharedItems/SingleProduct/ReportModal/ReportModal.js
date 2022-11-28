@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { toast } from 'react-toastify';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 
 const ReportModal = ({productModalReport}) => {
@@ -26,9 +27,8 @@ const ReportModal = ({productModalReport}) => {
       body:JSON.stringify(reportInfo)
     })
     .then(res=>res.json())
-    .then(result=>{
-    })
-
+    .then(result=>{})
+    toast.success('Report Successful')
     }
     return (
         <>

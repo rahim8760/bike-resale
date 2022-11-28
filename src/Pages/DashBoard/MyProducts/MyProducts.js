@@ -1,22 +1,19 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext} from 'react';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
 import {AuthContext} from '../../../Context/AuthProvider/AuthProvider'
-import axios from "axios";
 import { toast } from 'react-toastify';
+import { useQuery } from '@tanstack/react-query';
 
 const MyProducts = () => {
     const {user}=useContext(AuthContext)
     const{email, displayName}=user
-    console.log(email);
 
-    const [showProducts, setShowProducts]=useState([])
-        useEffect(()=>{
-            axios
-            .get(`http://localhost:5000/myProduct/${email}`)
-            .then((res) => setShowProducts(res.data));
-        },[email])
-
+    const {data:showProducts=[],refetch}=useQuery({
+        queryKey:['myProduct'],
+        queryFn:()=>fetch(`http://localhost:5000/myProduct/${email}`)
+        .then(res=>res.json())
+    })
     const handleDelete = id=>{
         const agree =window.confirm('you want to delete')
         if(agree){
@@ -26,8 +23,7 @@ const MyProducts = () => {
             .then(res=>res.json())
             .then (data=>{
                 if(data.deletedCount > 0){
-                  const remaining = showProducts.filter(r => r._id !== id);
-                  setShowProducts(remaining);
+                  refetch()
                     toast.success('delete successfully')
                 }
             })
@@ -36,10 +32,9 @@ const MyProducts = () => {
       const status={
         Status:'approved'
       }
-      console.log(status);
       const handleSubmit=(id)=>{
         console.log(id);
-        fetch(`http://localhost:5000/updateProduct?status=/${id}`,{
+        fetch(`http://localhost:5000/updateProduct/${id}`,{
             method:'PUT',
             headers:{
                 'content-type':'application/json'
@@ -48,8 +43,7 @@ const MyProducts = () => {
         })
         .then(res=>res.json())
         .then(data=>{
-            console.log(data)
-            setShowProducts(...data)
+            refetch()
         })
     }
     
@@ -90,8 +84,12 @@ const MyProducts = () => {
                             <td>{product.originalPrice}</td> 
                             <td>{product.resalePrice}</td> 
                             <td>{product.useTime} Year</td>
-                            <td>{product?.Status }</td>
-                            <td> {product?.Status ==='approved' ? <><button type='submit' onClick={()=>handleSubmit(product._id)} disabled className='btn  btn-sm bg-info' > make advertise</button></>:<><button type='submit' onClick={()=>handleSubmit(product._id)}  className='btn btn-sm bg-info' > make advertise</button></> } </td>
+                            <td><div className="badge  badge-warning gap-2">{product?.Status }</div></td>
+                            <td> {product?.Status ==='Available' ? 
+                            
+                            <><button type='submit' onClick={()=>handleSubmit(product._id)}  className='btn btn-sm bg-info' > make advertise</button></>:
+                            <><button type='submit' onClick={()=>handleSubmit(product._id)} disabled className='btn  btn-sm bg-info' > make advertise</button></>
+                             } </td>
                             <td><button onClick={()=>handleDelete(product._id)} className='btn btn-sm bg-red-600'>DELETE</button></td>
                             </tr>)
                         }      

@@ -28,11 +28,10 @@ const SingleProduct = ({singleCate, setProductModalInfo, setProductModalReport})
                     <div className="card-actions justify-between">
                     <label  onClick={()=>setProductModalReport(singleCate)} className='btn btn-warning' htmlFor="Report-modal"> Report Here</label>
                     <label  onClick={()=>setProductModalInfo(singleCate)} className='btn btn-info' htmlFor="booking-modal">Book Now</label>
+                    
                         
                     </div>
             </div>
-            {/* The button to open modal */}
-                {/* Put this part before </body> tag */}
                 
         </div>
     );

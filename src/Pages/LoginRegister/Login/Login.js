@@ -7,7 +7,6 @@ const Login = () => {
     const {signIn, setLoading, setUser, providerLogin, verifyEmail }=useContext(AuthContext);
     const [error, setError] = useState('');
     const googleProvider= new GoogleAuthProvider()
-
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
@@ -35,24 +34,7 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 // jwt
-                const currentUser={
-                    eamil:user.email
-                }
-                // JWT
-                fetch('http://localhost:5000/jwt',{
-                    method:'POST',
-                    headers:{
-                        'content-type':'application/json'
-                    },
-                    body:JSON.stringify(currentUser)
-                })
-                .then(res=>res.json())
-                .then(data=> {
-                    console.log(data);
-                    localStorage.setItem('ACC_Token',data.token)
-                })
-
-
+                getUserToken(user.email)
                 setUser(user)
                 form.reset();
                 setError('');
@@ -67,6 +49,15 @@ const Login = () => {
             .finally(() => {
                 setLoading(false);
             })
+    }
+    const getUserToken=email=>{
+        fetch(`http://localhost:5000/jwt?email=${email}`)
+        .then(res=>res.json())
+        .then(data=>{
+            if(data.access_Token){
+                navigate('/');
+            }
+        })
     }
     return (
         <div className="hero min-h-screen bg-base-200">
