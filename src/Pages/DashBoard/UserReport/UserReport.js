@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
 import axios from "axios";
+import useTitle from '../../../Hooks/useTitle';
 const UserReport = () => {
-
+        useTitle('User Report')
     const [showProducts, setShowProducts]=useState([])
         useEffect(()=>{
             axios
-            .get(`http://localhost:5000/reports`)
+            .get(`https://bike-resale-server-eta.vercel.app/reports`)
             .then((res) => setShowProducts(res.data));
         },[])
       

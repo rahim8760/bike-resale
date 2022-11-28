@@ -4,7 +4,9 @@ import 'react-photo-view/dist/react-photo-view.css';
 import {AuthContext} from '../../../Context/AuthProvider/AuthProvider'
 import axios from "axios";
 import { toast } from 'react-toastify';
+import useTitle from '../../../Hooks/useTitle';
 const MyBuyers = () => {
+    useTitle('My Buyers')
     const {user}=useContext(AuthContext)
     const{email, displayName}=user
     console.log(email);
@@ -12,14 +14,14 @@ const MyBuyers = () => {
     const [showProducts, setShowProducts]=useState([])
         useEffect(()=>{
             axios
-            .get(`http://localhost:5000/myBuyers/${email}`)
+            .get(`https://bike-resale-server-eta.vercel.app/myBuyers/${email}`)
             .then((res) => setShowProducts(res.data));
         },[email])
 
     const handleDelete = id=>{
         const agree =window.confirm('you want to delete')
         if(agree){
-            fetch(`http://localhost:5000/bookingDelete/${id}`,{
+            fetch(`https://bike-resale-server-eta.vercel.app/bookingDelete/${id}`,{
                 method:'DELETE'
             })
             .then(res=>res.json())

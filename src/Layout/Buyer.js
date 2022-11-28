@@ -1,27 +1,27 @@
-import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
-import Header from '../SharedItems/Header/Header';
+// import React from 'react';
+// import { Link, Outlet } from 'react-router-dom';
+// import Header from '../SharedItems/Header/Header';
 
-const Buyer = () => {
-    return (
-        <div>
-            <Header></Header>
-            <div className="drawer drawer-mobile">
-                <input id="dashboard_drawer" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content">
-                    <Outlet></Outlet>
-                </div>
-                <div className="drawer-side">
-                    <label htmlFor="dashboard_drawer" className="drawer-overlay"></label>
-                    <ul className="menu p-4 w-80 text-base-content">    
-                        <li><Link to="/dashBoard/buyer/myProfile">myProfile</Link></li>
-                        <li><Link to="/dashBoard/buyer/myOrder">My Orders</Link></li>
-                    </ul>
+// const Buyer = () => {
+//     return (
+//         <div>
+//             <Header></Header>
+//             <div className="drawer drawer-mobile">
+//                 <input id="dashboard_drawer" type="checkbox" className="drawer-toggle" />
+//                 <div className="drawer-content">
+//                     <Outlet></Outlet>
+//                 </div>
+//                 <div className="drawer-side">
+//                     <label htmlFor="dashboard_drawer" className="drawer-overlay"></label>
+//                     <ul className="menu p-4 w-80 text-base-content">    
+//                         <li><Link to="/dashBoard/buyer/myProfile">myProfile</Link></li>
+//                         <li><Link to="/dashBoard/buyer/myOrder">My Orders</Link></li>
+//                     </ul>
 
-                </div>
-            </div>
-        </div>
-    );
-};
+//                 </div>
+//             </div>
+//         </div>
+//     );
+// };
 
-export default Buyer;
+// export default Buyer;

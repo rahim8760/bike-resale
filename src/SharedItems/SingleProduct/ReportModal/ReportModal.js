@@ -7,7 +7,7 @@ const ReportModal = ({productModalReport}) => {
     
     const {user}=useContext(AuthContext)
     const {displayName, email}=user
-    const [reportInfo, setReportInfo]=useState({sellerEmail:userInfo?.email,resalePrice,location,picture,title,buyerEmail:user?.email, byerdisplayName:user?.displayName})
+    const [reportInfo, setReportInfo]=useState({sellerEmail:userInfo?.email, resalePrice, location, picture, title, buyerEmail:user?.email, byerdisplayName:user?.displayName})
     console.log(reportInfo);
     const handleBlur=event=>{
         const FieldName=event.target.name;
@@ -19,7 +19,7 @@ const ReportModal = ({productModalReport}) => {
     }
     
     const handleBookingSubmit=event=>{
-        fetch('http://localhost:5000/report',{
+        fetch('https://bike-resale-server-eta.vercel.app/report',{
       method:"POST",
       headers:{
         "content-type":"application/json"

@@ -7,7 +7,7 @@ const ProductModal = ({productModalInfo}) => {
     
     const {user}=useContext(AuthContext)
     const {displayName, email}=user
-    const [bookingInfo, setBookingInfo]=useState({sellerEmail:userInfo.email,resalePrice,location,picture,title,byerEmail:user?.email, byerdisplayName:user?.displayName})
+    const [bookingInfo, setBookingInfo]=useState({sellerEmail:userInfo.email, resalePrice, location, picture, title, byerEmail:user?.email, byerdisplayName:user?.displayName})
     console.log(bookingInfo);
     const handleBlur=event=>{
         const FieldName=event.target.name;
@@ -19,7 +19,7 @@ const ProductModal = ({productModalInfo}) => {
     }
     
     const handleBookingSubmit=event=>{
-        fetch('http://localhost:5000/booking',{
+        fetch('https://bike-resale-server-eta.vercel.app/booking',{
       method:"POST",
       headers:{
         "content-type":"application/json"
@@ -36,7 +36,7 @@ const ProductModal = ({productModalInfo}) => {
       console.log(status);
       const hendleStatus=(id)=>{
         console.log(id);
-        fetch(`http://localhost:5000/updateProduct/${id}`,{
+        fetch(`https://bike-resale-server-eta.vercel.app/updateProduct/${id}`,{
             method:'PUT',
             headers:{
                 'content-type':'application/json'

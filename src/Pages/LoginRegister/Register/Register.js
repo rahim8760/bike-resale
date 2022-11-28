@@ -2,8 +2,10 @@ import React, { useContext, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
+import useTitle from '../../../Hooks/useTitle';
 
 const Register = () => {
+    useTitle('Register')
     const { createUser,setUser, updateUserProfile} = useContext(AuthContext);
     const [error, setError] = useState('');
     
@@ -23,7 +25,7 @@ const Register = () => {
     const password=form.password.value
     const photo=form.userPhoto.files[0]
 
-    fetch('http://localhost:5000/users',{
+    fetch('https://bike-resale-server-eta.vercel.app/users',{
       method:"POST",
       headers:{
         "content-type":"application/json"
@@ -56,6 +58,7 @@ const Register = () => {
                 updateUserProfile(userinfo)
                 setUser(user);
                 setError('');
+                getUserToken(email)
                 form.reset();
                 toast.success(`Welcome ${displayName}`)
                 navigate(forms,{replace: true})
@@ -75,10 +78,21 @@ const Register = () => {
     const handleBlur=event=>{
         const FieldName=event.target.name;
         const FieldValue=event.target.value;
-        console.log(FieldName, FieldValue);
         const newUser={...dbUser};
         newUser[FieldName]=FieldValue;
         SetDbUser(newUser);
+    }
+
+    // jwt
+    const getUserToken=email=>{
+        fetch(`https://bike-resale-server-eta.vercel.app/jwt?email=${email}`)
+        .then(res=>res.json())
+        .then(data=>{
+            if(data.access_Token){
+                localStorage.setItem('accessToken', data.access_Token)
+                navigate(forms,{replace: true})
+            }
+        })
     }
     return (
         <div className="hero min-h-screen my-4 bg-base-200">

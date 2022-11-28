@@ -1,6 +1,8 @@
 import React from 'react';
+import useTitle from '../../../Hooks/useTitle';
 
 const InputCategory = () => {
+    useTitle('Add Category')
     const handleSubmit=event=>{
         event.preventDefault()
         const form=event.target
@@ -8,7 +10,7 @@ const InputCategory = () => {
         const dbCategory={
             category
         }
-        fetch('http://localhost:5000/category',{
+        fetch('https://bike-resale-server-eta.vercel.app/category',{
             method:"POST",
             headers:{
                 "content-type":"application/json"

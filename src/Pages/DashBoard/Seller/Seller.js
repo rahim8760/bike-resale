@@ -2,7 +2,9 @@ import React, { useContext, useEffect, useState } from 'react';
 import axios from "axios";
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
+import useTitle from '../../../Hooks/useTitle';
 const Seller = () => {
+    useTitle('Users')
     const {setLoading}=useContext(AuthContext)
     const [findUser, setFindUser]=useState()
     console.log(findUser);
@@ -18,14 +20,14 @@ const Seller = () => {
         const [dbUser, setDbUser]=useState([])
         useEffect(()=>{
             axios
-            .get(`http://localhost:5000/users/${findUser}`)
+            .get(`https://bike-resale-server-eta.vercel.app/users/${findUser}`)
             .then((res) => setDbUser(res.data));
         },[findUser])
         
         const handleDeletes = id=>{
             const agree =window.confirm('you want to delete')
             if(agree){
-                fetch(`http://localhost:5000/usersDelete/${id}`,{
+                fetch(`https://bike-resale-server-eta.vercel.app/usersDelete/${id}`,{
                     method:'DELETE'
                 })
                 .then(res=>res.json())
@@ -43,7 +45,7 @@ const Seller = () => {
             Status:'verify'
           }
     const handleUserStatus=id=>{
-        fetch(`http://localhost:5000/updateUser/${id}`,{
+        fetch(`https://bike-resale-server-eta.vercel.app/updateUser/${id}`,{
             method:'PUT',
             headers:{
                 'content-type':'application/json'

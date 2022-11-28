@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import useTitle from '../../Hooks/useTitle';
 import ProductModal from '../../SharedItems/SingleProduct/ProductModal/ProductModal';
 import ReportModal from '../../SharedItems/SingleProduct/ReportModal/ReportModal';
 import SingleProduct from '../../SharedItems/SingleProduct/SingleProduct';
@@ -8,15 +9,16 @@ import WhyUs from './WhyUs/WhyUs';
 // import axios from 'axios'
 
 const Home = () => {
+    useTitle('Home')
     const [category, setCategory]=useState([])
     useEffect(()=>{
-        fetch('http://localhost:5000/category')
+        fetch('https://bike-resale-server-eta.vercel.app/category')
         .then(res=>res.json())
         .then(data=>setCategory(data))
     },[])
     const [productInfo, setProductInfo]=useState([]);
     useEffect(()=>{
-        fetch(`http://localhost:5000/products/${'approved'}`)
+        fetch(`https://bike-resale-server-eta.vercel.app/products/${'approved'}`)
         .then(res=>res.json())
         .then(data=>setProductInfo(data))
     },[])

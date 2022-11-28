@@ -3,7 +3,9 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 import {GoogleAuthProvider} from 'firebase/auth'
+import useTitle from '../../../Hooks/useTitle';
 const Login = () => {
+    useTitle('Login')
     const {signIn, setLoading, setUser, providerLogin, verifyEmail }=useContext(AuthContext);
     const [error, setError] = useState('');
     const googleProvider= new GoogleAuthProvider()
@@ -28,17 +30,17 @@ const Login = () => {
         const form=event.target
         const email =form.email.value;
         const password =form.password.value
-        console.log(email, password);
 
         signIn(email, password)
             .then(result => {
                 const user = result.user;
                 // jwt
+                console.log(user.email);
                 getUserToken(user.email)
                 setUser(user)
                 form.reset();
                 setError('');
-                navigate(from, {replace: true});
+                // navigate(from, {replace: true});
                 toast.success(`welcome  ${email}`)
             })
             .catch(error => {
@@ -50,12 +52,13 @@ const Login = () => {
                 setLoading(false);
             })
     }
+    // jwt
     const getUserToken=email=>{
-        fetch(`http://localhost:5000/jwt?email=${email}`)
+        fetch(`https://bike-resale-server-eta.vercel.app/jwt?email=${email}`)
         .then(res=>res.json())
         .then(data=>{
             if(data.access_Token){
-                navigate('/');
+                navigate(from, {replace: true});
             }
         })
     }

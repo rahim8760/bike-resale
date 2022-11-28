@@ -1,6 +1,8 @@
 import React, { useContext, } from 'react';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
+import useTitle from '../../../Hooks/useTitle';
 const Users = () => {
+    useTitle('User Profile')
     const {user}=useContext(AuthContext)
     const {displayName, email, photoURL, }=user
     

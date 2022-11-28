@@ -1,7 +1,9 @@
 import React, {  useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
+import useTitle from '../../../Hooks/useTitle';
 const AddProduct = () => {
+    useTitle('Add Product')
     const {user}=useContext(AuthContext)
     const{ email, photoURL}=user
     const displayName=user?.displayName
@@ -18,7 +20,7 @@ const AddProduct = () => {
    const handleSubmit=(event)=>{
     event.preventDefault()
     
-    fetch('http://localhost:5000/product',{
+    fetch('https://bike-resale-server-eta.vercel.app/product',{
       method:"POST",
       headers:{
         "content-type":"application/json"
@@ -41,7 +43,7 @@ const AddProduct = () => {
     }
     const [category, setCategory]=useState([])
     useEffect(()=>{
-        fetch('http://localhost:5000/category')
+        fetch('https://bike-resale-server-eta.vercel.app/category')
         .then(res=>res.json())
         .then(data=>setCategory(data))
     },[])
@@ -54,19 +56,19 @@ const AddProduct = () => {
                             <label className="label">
                                 <span className="label-text">Title</span>
                             </label>
-                            <input type="text" onBlur={handleBlur} name='title' placeholder="title" className="input input-bordered" />
+                            <input type="text" required onBlur={handleBlur} name='title' placeholder="title" className="input input-bordered" />
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">photo Url</span>
                             </label>
-                            <input type="text" name='picture' onBlur={handleBlur} placeholder='photo Url' className="input input-bordered" />
+                            <input type="text" required name='picture' onBlur={handleBlur} placeholder='photo Url' className="input input-bordered" />
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Category</span>
                             </label>
-                            <select name='category' onBlur={handleBlur} className="select w-full input input-bordered">
+                            <select name='category' required onBlur={handleBlur} className="select w-full input input-bordered">
                             <option disabled selected>select Category</option>
                                 {
                                     category.map(sC=><option key={sC._id} value={sC.category}>{sC.category}</option>)
@@ -77,7 +79,7 @@ const AddProduct = () => {
                             <label className="label">
                                 <span className="label-text">Condition</span>
                             </label>
-                            <select name='Condition' onBlur={handleBlur} className="select w-full input input-bordered">
+                            <select name='Condition' required onBlur={handleBlur} className="select w-full input input-bordered">
                                 <option disabled selected>select Condition</option>
                                 <option value='New' >New</option>
                                 <option value='Used' >Used</option>
@@ -88,31 +90,31 @@ const AddProduct = () => {
                             <label className="label">
                                 <span className="label-text">Description</span>
                             </label>
-                            <input type="text" onBlur={handleBlur} name='Description' placeholder="Description" className="input input-bordered" />
+                            <input type="text" required onBlur={handleBlur} name='Description' placeholder="Description" className="input input-bordered" />
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Location</span>
                             </label>
-                        <input type="text" name='location' onBlur={handleBlur} placeholder="Location" className="input input-bordered" />
+                        <input type="text" name='location' required onBlur={handleBlur} placeholder="Location" className="input input-bordered" />
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">resalePrice</span>
                             </label>
-                        <input type="text" name='resalePrice' onBlur={handleBlur} placeholder="resalePrice" className="input input-bordered" />
+                        <input type="number" name='resalePrice' required onBlur={handleBlur} placeholder="resalePrice" className="input input-bordered" />
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">originalPrice</span>
                             </label>
-                        <input type="text" name='originalPrice' onBlur={handleBlur} placeholder="originalPrice" className="input input-bordered" />
+                        <input type="number" name='originalPrice' required onBlur={handleBlur} placeholder="originalPrice" className="input input-bordered" />
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">useTime</span>
                             </label>
-                        <input type="text" name='useTime' onBlur={handleBlur} placeholder="useTime" className="input input-bordered" />
+                        <input type="number" name='useTime' required onBlur={handleBlur} placeholder="useTime" className="input input-bordered" />
                         </div>
                         
                         <div className="form-control mt-6">
